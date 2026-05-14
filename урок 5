@@ -1,0 +1,59 @@
+#1
+n = int(input())
+
+if n == 0:
+    print("нулевое число")
+elif n > 0:
+    if n % 2 == 0:
+        print("положительное четное число")
+    else:
+        print("положительное нечетное число")
+        print("число не является четным")
+else:
+    if n % 2 == 0:
+        print("отрицательное четное число")
+    else:
+        print("отрицательное нечетное число")
+        print("число не является четным")
+
+#2
+word = input()
+
+vowels = "aeiou"
+vowel_counts = {v: 0 for v in vowels}
+
+total_vowels = 0
+total_consonants = 0
+
+for ch in word:
+    if ch in vowels:
+        vowel_counts[ch] += 1
+        total_vowels += 1
+    else:
+        total_consonants += 1
+
+print(total_vowels)
+print(total_consonants)
+
+for v in vowels:
+    if vowel_counts[v] > 0:
+        print(v, vowel_counts[v])
+    else:
+        print(v, False)
+
+
+#3
+X = int(input())
+A = int(input())
+B = int(input())
+
+if A >= X and B >= X:
+    print(2)
+elif A >= X and B < X:
+    print("Mike")
+elif B >= X and A < X:
+    print("Ivan")
+elif A < X and B < X and A + B >= X:
+    print(1)
+else:
+    print(0)
