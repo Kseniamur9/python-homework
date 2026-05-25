@@ -1,0 +1,23 @@
+n = int(input())
+numbers = list(map(int, input().split()))
+print(len(set(numbers)))
+
+
+
+
+list = list(map(int, input().split()))
+second = list(map(int, input().split()))
+print(len(set(list) & set(second)))
+
+
+
+
+
+numbers = list(map(int, input().split()))
+seen = set()
+for num in numbers:
+    if num in seen:
+        print("YES")
+    else:
+        print("NO")
+        seen.add(num)
