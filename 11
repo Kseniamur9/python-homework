@@ -1,0 +1,139 @@
+1
+def factorial(n):
+    result = 1
+    for i in range(1, n + 1):
+        result = result * i
+    return result
+ 
+ 
+n = int(input())
+f = factorial(n)
+ 
+result_list = []
+for i in range(f, 0, -1):
+    result_list.append(factorial(i))
+ 
+print(result_list)
+ 
+2
+import collections
+
+
+pets = {
+    1: {
+        "Мухтар": {
+            "Вид питомца": "Собака",
+            "Возраст питомца": 9,
+            "Имя владельца": "Павел"
+        }
+    },
+    2: {
+        "Каа": {
+            "Вид питомца": "желторотый питон",
+            "Возраст питомца": 19,
+            "Имя владельца": "Саша"
+        }
+    }
+}
+
+
+def get_pet(ID):
+    return pets[ID] if ID in pets.keys() else False
+
+
+def get_suffix(age):
+    if 11 <= age % 100 <= 19:
+        return 'лет'
+    rem = age % 10
+    if rem == 1:
+        return 'год'
+    if 2 <= rem <= 4:
+        return 'года'
+    return 'лет'
+
+
+def create():
+    if len(pets) == 0:
+        last = 0
+    else:
+        last = collections.deque(pets, maxlen=1)[0]
+    new_id = last + 1
+    name = input('Кличка питомца: ')
+    kind = input('Вид питомца: ')
+    age = int(input('Возраст питомца: '))
+    owner = input('Имя владельца: ')
+    pets[new_id] = {
+        name: {
+            "Вид питомца": kind,
+            "Возраст питомца": age,
+            "Имя владельца": owner
+        }
+    }
+    print('Питомец добавлен с ID', new_id)
+
+
+def read():
+    ID = int(input('Введите ID питомца: '))
+    pet = get_pet(ID)
+    if pet == False:
+        print('Питомца с таким ID нет в базе данных')
+        return
+    name = list(pet.keys())[0]
+    info = pet[name]
+    age = info["Возраст питомца"]
+    suffix = get_suffix(age)
+    print(f'Это {info["Вид питомца"]} по кличке "{name}". Возраст питомца: {age} {suffix}. Имя владельца: {info["Имя владельца"]}')
+
+
+def update():
+    ID = int(input('Введите ID питомца: '))
+    pet = get_pet(ID)
+    if pet == False:
+        print('Питомца с таким ID нет в базе данных')
+        return
+    name = list(pet.keys())[0]
+    kind = input('Новый вид питомца: ')
+    age = int(input('Новый возраст питомца: '))
+    owner = input('Новое имя владельца: ')
+    pets[ID][name]["Вид питомца"] = kind
+    pets[ID][name]["Возраст питомца"] = age
+    pets[ID][name]["Имя владельца"] = owner
+    print('Информация обновлена')
+
+
+def delete():
+    ID = int(input('Введите ID питомца: '))
+    pet = get_pet(ID)
+    if pet == False:
+        print('Питомца с таким ID нет в базе данных')
+        return
+    del pets[ID]
+    print('Питомец удалён')
+
+
+def pets_list():
+    for ID in pets:
+        name = list(pets[ID].keys())[0]
+        info = pets[ID][name]
+        age = info["Возраст питомца"]
+        suffix = get_suffix(age)
+        print(f'{ID}. {info["Вид питомца"]} по кличке "{name}". Возраст: {age} {suffix}. Владелец: {info["Имя владельца"]}')
+
+
+command = ''
+while command != 'stop':
+    command = input('Введите команду: ')
+    if command == 'create':
+        create()
+    elif command == 'read':
+        read()
+    elif command == 'update':
+        update()
+    elif command == 'delete':
+        delete()
+    elif command == 'list':
+        pets_list()
+    elif command == 'stop':
+        print('Программа завершена')
+    else:
+        print('Неизвестная команда')
