@@ -1,0 +1,41 @@
+import random
+
+
+def generate_matrix(rows, cols):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(cols):
+            row.append(random.randint(-100, 100))
+        matrix.append(row)
+    return matrix
+
+
+def add_matrices(a, b):
+    result = []
+    for i in range(len(a)):
+        row = []
+        for j in range(len(a[i])):
+            row.append(a[i][j] + b[i][j])
+        result.append(row)
+    return result
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
+
+rows = int(input('Количество строк: '))
+cols = int(input('Количество столбцов: '))
+
+matrix_1 = generate_matrix(rows, cols)
+matrix_2 = generate_matrix(rows, cols)
+matrix_3 = add_matrices(matrix_1, matrix_2)
+
+print('matrix_1:')
+print_matrix(matrix_1)
+print('matrix_2:')
+print_matrix(matrix_2)
+print('matrix_3:')
+print_matrix(matrix_3)
